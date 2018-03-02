@@ -21,6 +21,7 @@ angular.module('controllers').controller('contentModelChange', ['$scope', '$stat
       content: true,
       tags: true
     };
+
     $scope.thumbnailSize = {
       width: 400,
       height: 300

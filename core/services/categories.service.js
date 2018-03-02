@@ -11,14 +11,15 @@ var contentsService = require('../services/contents.service');
  * @param {Function} callback
  */
 exports.all = function (callback) {
-  var categoriesCache = cache.get('categories');
+  var categoriesCache = cache.get('catmediaModelegories');
 
   if (categoriesCache) {
     callback(null, _.cloneDeep(categoriesCache));
   } else {
     categoriesModel.find({})
-      .select('type name path isShow sort model views keywords description mixed')
+      .select('type name path isShow sort model views keywords description mixed thumbnail')
       .populate('model', 'type name description mixed system extensions')
+      .populate('thumbnail', 'fileName description date src')
       .populate('mixed.pageMedia', 'fileName description date src')
       .exec(function (err, categories) {
         if (err) {
@@ -34,6 +35,10 @@ exports.all = function (callback) {
         });
 
         categories = _.map(categories, function (category) {
+
+          //先判断是否存在图片对象，存在的话先缓存src属性
+          if (category.thumbnail) var thumbnailSrc = category.thumbnail.src;
+
           if (category.type === 'page' && !_.isEmpty(category.mixed.pageMedia)) var mediaSrc = _.map(category.mixed.pageMedia, 'src');
 
           category = category.toObject();
@@ -45,6 +50,9 @@ exports.all = function (callback) {
           }
 
           if (category.type !== 'page' && category.mixed) delete category.mixed.pageMedia; // 删除非单页分类的 pageMedia
+
+          //判断是否存在图片对象，存在的话把之前缓存的src属性复制到新的图片对象里面
+          if (category.thumbnail) category.thumbnail.src = thumbnailSrc;
 
           return category;
         });
@@ -117,12 +125,11 @@ exports.navigation = function (options, callback) {
     exports.tree,
     function (tree, callback) {
       tree = tree || [];
-
-      tree.unshift({
-        name: '首页',
-        path: '/',
+      /*tree.unshift({
+        name: '首页 Home',
+        path: '/home',
         isShow: true
-      });
+      });*/
 
       callback(null, tree);
     },
@@ -131,14 +138,12 @@ exports.navigation = function (options, callback) {
         return _.map(nodes, function (category) {
           if (category.path && category.path !== '/') {
             var regex = new RegExp('^' + category.path);
-
             category.current = regex.test(options.current);
           } else if (category.path && category.path === '/' && category.path === options.current) {
             category.current = true;
           } else {
             category.current = false;
           }
-
           if (category.nodes) {
             category.nodes = loop(category.nodes);
           }
@@ -148,6 +153,7 @@ exports.navigation = function (options, callback) {
       }
 
       var navigation = loop(tree);
+
 
       callback(null, navigation);
     }

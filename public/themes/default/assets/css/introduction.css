@@ -1,0 +1,201 @@
+/*集团介绍*/
+
+/*导航*/
+.content_nav{
+    width: 100%;
+}
+.content_nav>img{
+    width: 100%;
+    /*min-height: 150px;*/
+}
+.content_nav>ul{
+    width: 50%;
+    overflow: hidden;
+    list-style-type: none;
+    text-align: center;
+    padding: 0;
+    margin: auto;
+    margin-bottom: 75px;
+}
+.content_nav>ul>li{
+    width: 25%;
+    float: left;
+    height: 90px;
+    font-size: 14px;
+    color: #333333;
+    border-bottom: 1px solid #c3c3c3;
+}
+.content_nav>ul>li>a{
+    color: #333333;
+    display: block;
+    width: 35%;
+    min-width: 60px;
+    line-height: 87px;
+    margin: 0 auto;
+    text-decoration:none
+
+}
+.active_nav{
+    color: #F66F6A !important;
+    text-decoration: none;
+    border-bottom: 2px solid #F66F6A;
+}
+/*.content_nav>ul>li>a:hover {*/
+    /*color: #F66F6A;*/
+    /*text-decoration: none;*/
+    /*border-bottom: 2px solid #F66F6A;*/
+/*}*/
+
+/*集团介绍二级—以下都是*/
+.content_nav1{
+    /*width: 80%;*/
+    margin: 40px auto;
+    overflow: hidden;
+
+}
+
+.content_nav1>div{
+    width: 100%;
+    margin: 0 auto;
+}
+.content_nav1>div>span>img{
+    width: 70%;
+    /*margin: auto;*/
+    display: block;
+}
+.content_nav1>div>span:first-child{
+    width:35%;
+    float: left;
+}
+.content_nav1>div>span:last-child{
+    width:65%;
+    float: left;
+}
+
+/*组织架构*/
+.content_nav2{
+    /*width: 80%;*/
+    margin: 40px auto;
+}
+.content_nav2>img{
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 26px;
+    max-width: 628px;
+    width: 85%;
+
+}
+
+/*业务范围*/
+.content_nav3{
+    /*width: 60%;*/
+    margin: 40px auto;
+}
+.content_nav3>ul{
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+}
+
+.content_nav3>ul>li{
+    overflow: hidden;
+    margin-bottom: 46px;
+}
+
+.content_nav3>ul>li>span{
+    float: left;
+}
+.content_nav3>ul>li>span:first-child{
+    margin-right: 9%;
+}
+.content_nav3>ul>li>span:last-child{
+    width: 70%;
+    margin-top: 25px;
+}
+.content_nav3>ul>li>span:last-child>p:first-child{
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 32px;
+}
+.content_nav3>ul>li>span:last-child>p:last-child{
+    font-size: 14px;
+    color: #666666;
+    line-height: 25px;
+}
+
+/*股东背景*/
+.content_nav4{
+    /*width: 80%;*/
+    margin: 40px auto;
+}
+.content_nav4>img{
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 26px;
+    max-width: 1000px;
+    width: 85%;
+
+}
+
+
+
+/*媒体查询*/
+@media (max-width: 767px){
+
+    .content_nav>ul{
+        width: 95%;
+        height: 100px;
+        margin-top: 25px;
+        border-bottom: 1px solid #c3c3c3;
+    }
+    .content_nav>ul>li{
+        width: 50%;
+        height: 45%;
+        line-height: 40px;
+        border-bottom: none;
+    }
+    .content_nav>ul>li>a{
+        color: #999999;
+        display: block;
+        width: 35%;
+        margin: 0 auto;
+        line-height: 42px;
+        /*border-bottom: none;*/
+    }
+
+    .content_nav1>div>span:first-child{
+        width:100%;
+    }
+    .content_nav1>div>span:last-child{
+        width:100%;
+
+    }
+    .content_nav1>div>span>img{
+        width: 70%;
+        margin: auto;
+        display: block;
+    }
+
+    /*业务范围*/
+    .content_nav3{
+
+    }
+    .content_nav3>ul>li>span{
+        float: none;
+        display: block;
+        /*text-align: center;*/
+    }
+    .content_nav3>ul>li>span:first-child>img{
+        display: block;
+        margin: auto;
+    }
+    .content_nav3>ul>li>span:first-child{
+        margin: 0;
+    }
+    .content_nav3>ul>li>span:last-child{
+        width: 100%;
+    }
+    .content_nav3>ul>li>span:last-child>p:first-child{
+        text-align: center;
+    }
+}

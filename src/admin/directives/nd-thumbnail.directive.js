@@ -13,8 +13,10 @@ angular.module('directives').directive('ndThumbnail',  ['$templateCache', '$time
         width: '=',
         height: '='
       },
+
       link: function (scope, element, attrs, ctrl) {
         'use strict';
+
 
         /**
          * 初始化变量
@@ -26,6 +28,7 @@ angular.module('directives').directive('ndThumbnail',  ['$templateCache', '$time
           croppedImage: scope.thumbnail.croppedImage || '',
           uploadStatus: scope.thumbnail.uploadStatus || 'initial'
         };
+
         scope.minWidth = scope.width / 2;
         scope.minHeight = scope.height / 2;
 
@@ -76,6 +79,7 @@ angular.module('directives').directive('ndThumbnail',  ['$templateCache', '$time
             scope.thumbnail.uploadStatus = 'success';
 
             scope.thumbnail._id = data._id;
+
           }, function () {
             scope.$emit('notification', {
               type: 'danger',

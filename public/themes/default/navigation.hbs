@@ -1,4 +1,4 @@
-<div class="container hidden-xs">
+<!--<div class="container hidden-xs">
   <div class="row">
     <div class="col-md-3">
       <a class="brand" href="/" title="{{siteInfo.title}}"><img height="36" alt="{{siteInfo.title}}" src="/themes/{{siteInfo.theme}}/assets/img/logo.png"></a>
@@ -37,18 +37,32 @@
       </form>
     </div>
   </div>
-</nav>
-{{#foreach navigation}}
-  {{#if current}}
-    {{#if nodes}}
-      <div class="container">
-        <div class="navbar-sub-category">
-          {{#foreach nodes}}
-            <a class="btn btn-link" href="{{#if path}}{{path}}{{else}}{{mixed.url}}{{/if}}" title="{{name}}" role="button">{{name}}</a>
-          {{/foreach}}
+</nav>-->
+<nav class="head-nav">
+    <h2 class="auto-width">
+        <a href="index.html"><span class="logo"></span></a>
+        <div class="menu-div">
+            <span class="menu-span icon menu-close"></span>
+            {{#foreach navigation}}
+              {{#if isShow}}
+                <div class="{{#if current}}active{{/if}}"><a href="{{#if nodes}}javascript:void(0);{{else}}{{#if path}}{{path}}{{else}}{{mixed.url}}{{/if}}{{/if}}" title="{{name}}"><span class="cn">{{name}}</span></a>
+
+                  {{#if nodes}}
+                    <ul class="second-menu">
+                      {{#foreach nodes}}
+                        <li><a href="{{path}}">{{name}}</a></li>
+                      {{/foreach}}
+                    </ul>
+                  {{/if}}
+                </div>
+              {{/if}}
+            {{/foreach}}
         </div>
-        <hr>
-      </div>
-    {{/if}}
-  {{/if}}
-{{/foreach}}
+
+    </h2>
+</nav>
+
+
+<div class="head-box">
+
+</div>

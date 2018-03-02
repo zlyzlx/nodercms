@@ -26,6 +26,7 @@ exports.query = function (req, res) {
         logger[err.type]().error(err);
         return res.status(500).end();
       }
+      categories.id=3215;
 
       res.status(200).json(categories);
     });
@@ -98,10 +99,15 @@ exports.create = function (req, res) {
       },
       isBoolean: { errorMessage: 'isShow 需为布尔值' }
     },
+    'thumbnail': {
+      optional: true,
+      isMongoId: { errorMessage: 'thumbnail _id 需为 mongoId' }
+    },
     sort: {
       optional: true,
       isNumber: { errorMessage: 'sort 需为数字' }
-    }
+    },
+
   });
 
   switch (req.body.type) {
@@ -260,6 +266,7 @@ exports.create = function (req, res) {
     type: req.body.type,
     name: req.body.name,
     isShow: req.body.isShow,
+    thumbnail: req.body.thumbnail,
     sort: req.body.sort
   };
 
@@ -339,6 +346,10 @@ exports.update = function (req, res) {
     'isShow': {
       optional: true,
       isBoolean: { errorMessage: 'isShow 需为布尔值' }
+    },
+    'thumbnail': {
+      optional: true,
+      isMongoId: { errorMessage: 'thumbnail 需为 mongoId' }
     },
     'sort': {
       optional: true,
@@ -463,15 +474,15 @@ exports.update = function (req, res) {
   if (req.body.type) data.type = req.body.type;
   if (req.body.name) data.name = req.body.name;
   if (_.isBoolean(req.body.isShow)) data.isShow = req.body.isShow;
+  if (req.body.thumbnail) data.thumbnail = req.body.thumbnail;
   if (_.isNumber(req.body.sort)) data.sort = req.body.sort;
-
   switch (req.body.type) {
     case 'channel':
       if (req.body.path) data.path = req.body.path;
       if (req.body['views.layout']) data['views.layout'] = req.body['views.layout'];
       if (req.body['views.channel']) data['views.channel'] = req.body['views.channel'];
-      if (req.body.keywords) data.keywords = req.body.keywords;
-      if (req.body.description) data.description = req.body.description;
+      if (req.body.keywords||req.body.keywords=="") data.keywords = req.body.keywords;
+      if (req.body.description||req.body.description=="") data.description = req.body.description;
 
       break;
     case 'column':
@@ -481,8 +492,8 @@ exports.update = function (req, res) {
       if (req.body['views.layout']) data['views.layout'] = req.body['views.layout'];
       if (req.body['views.column']) data['views.column'] = req.body['views.column'];
       if (req.body['views.content']) data['views.content'] = req.body['views.content'];
-      if (req.body.keywords) data.keywords = req.body.keywords;
-      if (req.body.description) data.description = req.body.description;
+      if (req.body.keywords||req.body.keywords=="") data.keywords = req.body.keywords;
+      if (req.body.description||req.body.description=="") data.description = req.body.description;
 
       break;
     case 'page':
@@ -490,8 +501,8 @@ exports.update = function (req, res) {
       if (req.body['views.layout']) data['views.layout'] = req.body['views.layout'];
       if (req.body['views.page']) data['views.page'] = req.body['views.page'];
       if (_.isBoolean(req.body['mixed.isEdit'])) data['mixed.isEdit'] = req.body['mixed.isEdit'];
-      if (req.body.keywords) data.keywords = req.body.keywords;
-      if (req.body.description) data.description = req.body.description;
+      if (req.body.keywords||req.body.keywords=="") data.keywords = req.body.keywords;
+      if (req.body.description||req.body.description=="") data.description = req.body.description;
       break;
     case 'link':
       if (req.body['mixed.prePath']) data['mixed.prePath'] = req.body['mixed.prePath'];

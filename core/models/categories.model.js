@@ -40,6 +40,18 @@ var categoriesSchema = new mongoose.Schema({
     default: 0
   },
 
+  //banner图
+  thumbnail: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Media'
+  },
+
+  // 排序
+  sort: {
+    type: Number,
+    default: 0
+  },
+
   // 内容模型
   model: {
     type: mongoose.Schema.Types.ObjectId,

@@ -51,6 +51,8 @@ angular.module('controllers').controller('categoriesChange', ['$scope', '$state'
     $scope.description = '';
     $scope._id = $stateParams._id ? $stateParams._id : 'null';
 
+    $scope.thumbnail = {};
+
     /**
      * 翻译 Type
      */
@@ -125,6 +127,8 @@ angular.module('controllers').controller('categoriesChange', ['$scope', '$state'
       $scope.views.page = 'page-default';
 
       if (results.category) {
+
+
         $scope.type = results.category.type;
         $scope.name = results.category.name;
         $scope.directory = /[A-z0-9\_\-]+$/.exec(results.category.path)[0];
@@ -152,6 +156,13 @@ angular.module('controllers').controller('categoriesChange', ['$scope', '$state'
         }
         $scope.keywords = results.category.keywords || '';
         $scope.description = results.category.description || '';
+        $scope.thumbnail = results.category.thumbnail || {};
+
+        if (results.category.thumbnail) {
+          $scope.thumbnail._id = results.category.thumbnail._id;
+          $scope.thumbnail.uploadStatus = 'success';
+          $scope.thumbnail.croppedImage = results.category.thumbnail.src;
+        }
 
         if (results.category.mixed) {
           $scope.url = results.category.mixed.url || '';
@@ -182,6 +193,7 @@ angular.module('controllers').controller('categoriesChange', ['$scope', '$state'
           category['views.channel'] = $scope.views.channel;
           category.keywords = $scope.keywords;
           category.description = $scope.description;
+          category.thumbnail = $scope.thumbnail._id;
 
           break;
         case 'column':
@@ -197,7 +209,7 @@ angular.module('controllers').controller('categoriesChange', ['$scope', '$state'
           category['views.content'] = $scope.views.content;
           category.keywords = $scope.keywords;
           category.description = $scope.description;
-
+          category.thumbnail = $scope.thumbnail._id;
           break;
         case 'page':
           if ($scope.prePath) {
@@ -210,6 +222,7 @@ angular.module('controllers').controller('categoriesChange', ['$scope', '$state'
           category['mixed.isEdit'] = $scope.isEdit;
           category.keywords = $scope.keywords;
           category.description = $scope.description;
+          category.thumbnail = $scope.thumbnail._id;
 
           break;
         case 'link':
